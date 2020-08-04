@@ -16,6 +16,14 @@ import numpy as np
 from pyhdf.SD import SD,SDC #utility to read hdf files, tutorial: https://www.hdfeos.org/software/pyhdf.php
 from matplotlib.mlab import PCA #for PCA
 #%%
+
+def remove_non_calibrated(spectra3D):
+    #now n is an array that has indices with all of the channels set to zero
+    #Calibrated channels are 8-57 for the VNIR, and 77-224 for the SWIR
+    concatenated = (*range(0,9), *range(59, 78), *range(226, 243))
+    calibrated=np.delete(spectra3D, concatenated, axis=1)
+    return calibrated
+    
 def remove_zero(spectra3D):
     #now n is an array that has indices with all of the channels set to zero
     l=spectra3D[15,:,:]
@@ -25,11 +33,7 @@ def remove_zero(spectra3D):
            non_calibrated.append(i)
     return np.delete(spectra3D, (non_calibrated), axis=1)
     
-def remove_non_calibrated(spectra3D):
-    #now n is an array that has indices with all of the channels set to zero
-    concatenated = (*range(0,9), *range(59, 78), *range(226, 243))
-    calibrated=np.delete(spectra3D, concatenated, axis=1)
-    return calibrated
+
     
 def flatten_data(spectra3D):
     spectra2D=np.zeros((np.shape(spectra3D)[0]*np.shape(spectra3D)[2],np.shape(spectra3D)[1]))

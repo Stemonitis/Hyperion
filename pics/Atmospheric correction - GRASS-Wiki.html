@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<!-- saved from url=(0055)https://grasswiki.osgeo.org/wiki/Atmospheric_correction -->
+<html lang="en" dir="ltr" class="client-js"><script type="text/javascript" charset="utf-8" id="zm-extension" src="chrome-extension://fdcgdnkidjaadafnichfpabhfomcebme/scripts/webrtc-patch.js" async=""></script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Atmospheric correction - GRASS-Wiki</title>
+<script>document.documentElement.className = document.documentElement.className.replace( /(^|\s)client-nojs(\s|$)/, "$1client-js$2" );</script>
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"Atmospheric_correction","wgTitle":"Atmospheric correction","wgCurRevisionId":26157,"wgRevisionId":26157,"wgArticleId":2022,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":["Documentation","Tutorial","Image processing"],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"Atmospheric_correction","wgRelevantArticleId":2022,"wgRequestId":"39e4214bb6e14493f23d3a09","wgIsProbablyEditable":false,"wgRestrictionEdit":[],"wgRestrictionMove":[],"wgWikiEditorEnabledModules":{"toolbar":true,"dialogs":true,"preview":true,"publish":true}});mw.loader.implement("user.options",function($,jQuery,require,module){mw.user.options.set({"variant":"en"});});mw.loader.implement("user.tokens",function ( $, jQuery, require, module ) {
+mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":"+\\","csrfToken":"+\\"});/*@nomin*/;
+
+});mw.loader.load(["mediawiki.page.startup","skins.vector.js"]);});</script>
+<link rel="stylesheet" href="./Atmospheric correction - GRASS-Wiki_files/load.php">
+<style>
+.mw-collapsible-toggle{float:right;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;user-select:none}  .mw-content-ltr .mw-collapsible-toggle,.mw-content-rtl .mw-content-ltr .mw-collapsible-toggle{float:right} .mw-content-rtl .mw-collapsible-toggle,.mw-content-ltr .mw-content-rtl .mw-collapsible-toggle{float:left}.mw-customtoggle,.mw-collapsible-toggle{cursor:pointer} caption .mw-collapsible-toggle,.mw-content-ltr caption .mw-collapsible-toggle,.mw-content-rtl caption .mw-collapsible-toggle,.mw-content-rtl .mw-content-ltr caption .mw-collapsible-toggle,.mw-content-ltr .mw-content-rtl caption .mw-collapsible-toggle{float:none} li .mw-collapsible-toggle,.mw-content-ltr li .mw-collapsible-toggle,.mw-content-rtl li .mw-collapsible-toggle,.mw-content-rtl .mw-content-ltr li .mw-collapsible-toggle,.mw-content-ltr .mw-content-rtl li .mw-collapsible-toggle{float:none} .mw-collapsible-toggle-li{list-style:none}
+@media screen {
+	.tochidden,.toctoggle{-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;user-select:none}.toctoggle{font-size:94%}}
+@media print {
+	#toc.tochidden,.toctoggle{display:none}}
+.suggestions{overflow:hidden;position:absolute;top:0;left:0;width:0;border:none;z-index:1099;padding:0;margin:-1px 0 0 0}.suggestions-special{position:relative;background-color:white;cursor:pointer;border:solid 1px #aaaaaa;padding:0;margin:0;margin-top:-2px;display:none;padding:0.25em 0.25em;line-height:1.25em}.suggestions-results{background-color:white;cursor:pointer;border:solid 1px #aaaaaa;padding:0;margin:0}.suggestions-result{color:black;margin:0;line-height:1.5em;padding:0.01em 0.25em;text-align:left; overflow:hidden;-o-text-overflow:ellipsis; text-overflow:ellipsis;white-space:nowrap}.suggestions-result-current{background-color:#4C59A6;color:white}.suggestions-special .special-label{color:gray;text-align:left}.suggestions-special .special-query{color:black;font-style:italic;text-align:left}.suggestions-special .special-hover{background-color:silver}.suggestions-result-current .special-label,.suggestions-result-current .special-query{color:white}.highlight{font-weight:bold}
+.postedit-container{margin:0 auto;position:fixed;top:0;height:0;left:50%;z-index:1000;font-size:13px}.postedit-container:hover{cursor:pointer}.postedit{position:relative;top:0.6em;left:-50%;padding:.6em 3.6em .6em 1.1em;line-height:1.5625em;color:#626465;background-color:#f4f4f4;border:1px solid #dcd9d9;text-shadow:0 0.0625em 0 rgba(255,255,255,0.5);border-radius:5px;box-shadow:0 2px 5px 0 #ccc;-webkit-transition:all 0.25s ease-in-out;-moz-transition:all 0.25s ease-in-out;-ms-transition:all 0.25s ease-in-out;-o-transition:all 0.25s ease-in-out;transition:all 0.25s ease-in-out}.skin-monobook .postedit{top:6em !important}.postedit-faded{opacity:0}.postedit-icon{padding-left:41px;  line-height:25px;background-repeat:no-repeat;background-position:8px 50%}.postedit-icon-checkmark{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAB9ElEQVR4AZWRA3AYURQArxrVHtW2bdu2bdu2zdi2bdu2bWxs7zeehZaw4f70kbs+zI3e/nWK+RWx3aOFlrL56Sy5SxrruG69hlv6OyK+mz+8KDSXdXembj0ispT7tjs4ZTIbpYBvxGSGKzZTeFrb7W/meN002swFs0U8ttpHTkF2BvCqWQrW35929bTsKm5Zb+SEwWwcY8wAngB9m7Z+d+rIPZ/npdy12M5p47n8dXsCYAf0qPy06eGMdktuDu9Qf+JmKl3SWM91qzVcN9tAbEYkwMaq0tyb1m/To5kP170el/BK8/qa6sJr70ydf+T/Uu5ab+Oo/lS0AkUBpIFWlZ9WPhxpse/PHO7YbOOczjL0vZV2lNxPPtG73dYXM+xvm2znrOl83tidoqCwMBgYXsPFB0on5S6pr+eK5TKuW67lgvaKvF8mL1dtfTL32FHxRdyx3cQpg7m4x9sCXKkTIzA4LDH44zWdzaUf71hv5rTG4uyzcusybxSX7aThbMQ8XgCYAp3rzTTQOiIh9PNlzY3FSuZxrzjme1Y7uGS6kjsWO4jPjM4FVjRZsvD4kO9XtTZzQn82NyzWc0B7AmZh6gA/hOYSGhfw9YbOVnarj+S7800AL2BIsxUAbWNToj7bhBuQmZcOsFdoKUC74rGheCwXmqAIQTc9jQcrADIAAAAASUVORK5CYII=);background-image:url(/w/resources/src/mediawiki.action/images/green-checkmark.png?d94f1)!ie;background-position:left}.postedit-close{position:absolute;padding:0 .8em;right:0;top:0;font-size:1.25em;font-weight:bold;line-height:2.3em;color:black;text-shadow:0 0.0625em 0 white;text-decoration:none;opacity:0.2;filter:alpha(opacity=20)}.postedit-close:hover{color:black;text-decoration:none;opacity:0.4;filter:alpha(opacity=40)}</style><style>
+.suggestions a.mw-searchSuggest-link,.suggestions a.mw-searchSuggest-link:hover,.suggestions a.mw-searchSuggest-link:active,.suggestions a.mw-searchSuggest-link:focus{color:black;text-decoration:none}.suggestions-result-current a.mw-searchSuggest-link,.suggestions-result-current a.mw-searchSuggest-link:hover,.suggestions-result-current a.mw-searchSuggest-link:active,.suggestions-result-current a.mw-searchSuggest-link:focus{color:white}.suggestions a.mw-searchSuggest-link .special-query{ overflow:hidden;-o-text-overflow:ellipsis; text-overflow:ellipsis;white-space:nowrap}</style><meta name="ResourceLoaderDynamicStyles" content="">
+<script async="" src="./Atmospheric correction - GRASS-Wiki_files/load(1).php"></script>
+<meta name="generator" content="MediaWiki 1.27.1">
+<link rel="shortcut icon" href="https://grasswiki.osgeo.org/favicon.ico">
+<link rel="search" type="application/opensearchdescription+xml" href="https://grasswiki.osgeo.org/w/opensearch_desc.php" title="GRASS-Wiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://grasswiki.osgeo.org/w/api.php?action=rsd">
+<link rel="copyright" href="http://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="GRASS-Wiki Atom feed" href="https://grasswiki.osgeo.org/w/index.php?title=Special:RecentChanges&amp;feed=atom">
+<script src="./Atmospheric correction - GRASS-Wiki_files/load(2).php"></script></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Atmospheric_correction rootpage-Atmospheric_correction skin-vector action-view">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<div id="content" class="mw-body" role="main">
+			<a id="top"></a>
+
+						<div class="mw-indicators">
+</div>
+			<h1 id="firstHeading" class="firstHeading" lang="en">Atmospheric correction</h1>
+									<div id="bodyContent" class="mw-body-content">
+									<div id="siteSub">From GRASS-Wiki</div>
+								<div id="contentSub"></div>
+												<div id="jump-to-nav" class="mw-jump">
+					Jump to:					<a href="https://grasswiki.osgeo.org/wiki/Atmospheric_correction#mw-head">navigation</a>, 					<a href="https://grasswiki.osgeo.org/wiki/Atmospheric_correction#p-search">search</a>
+				</div>
+				<div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr"><p>See also the <a href="https://grasswiki.osgeo.org/wiki/LANDSAT" title="LANDSAT">LANDSAT</a> wiki page.
+</p><p><b>Aim of this tutorial:</b>
+</p>
+<ul><li> Transforming a Landsat ETM+ image from DN values to radiance values</li>
+<li> Conducting an atmospheric correction of a Landsat image using the <span class="plainlinks"><a rel="nofollow" class="external text" href="https://grass.osgeo.org/grass78/manuals/i.atcorr.html">i.atcorr</a></span> module in GRASS GIS and convert radiance to reflectance values</li></ul>
+<div id="toc" class="toc"><div id="toctitle"><h2>Contents</h2><span class="toctoggle">&nbsp;[<a href="https://grasswiki.osgeo.org/wiki/Atmospheric_correction#" id="togglelink">hide</a>]&nbsp;</span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="https://grasswiki.osgeo.org/wiki/Atmospheric_correction#Introduction"><span class="tocnumber">1</span> <span class="toctext">Introduction</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="https://grasswiki.osgeo.org/wiki/Atmospheric_correction#Requirements"><span class="tocnumber">2</span> <span class="toctext">Requirements</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="https://grasswiki.osgeo.org/wiki/Atmospheric_correction#Calculating_radiance_values"><span class="tocnumber">3</span> <span class="toctext">Calculating radiance values</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="https://grasswiki.osgeo.org/wiki/Atmospheric_correction#Estimating_the_overpass_time"><span class="tocnumber">4</span> <span class="toctext">Estimating the overpass time</span></a>
+<ul>
+<li class="toclevel-2 tocsection-5"><a href="https://grasswiki.osgeo.org/wiki/Atmospheric_correction#From_sun_position"><span class="tocnumber">4.1</span> <span class="toctext">From sun position</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="https://grasswiki.osgeo.org/wiki/Atmospheric_correction#From_NASA_web_tool"><span class="tocnumber">4.2</span> <span class="toctext">From NASA web tool</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-7"><a href="https://grasswiki.osgeo.org/wiki/Atmospheric_correction#Atmospheric_correction"><span class="tocnumber">5</span> <span class="toctext">Atmospheric correction</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="https://grasswiki.osgeo.org/wiki/Atmospheric_correction#Sources_for_aerosol_optical_depth_.28AOD.29_estimations"><span class="tocnumber">6</span> <span class="toctext">Sources for aerosol optical depth (AOD) estimations</span></a>
+<ul>
+<li class="toclevel-2 tocsection-9"><a href="https://grasswiki.osgeo.org/wiki/Atmospheric_correction#T.CE.BFD.CE.BF"><span class="tocnumber">6.1</span> <span class="toctext">TοDο</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-10"><a href="https://grasswiki.osgeo.org/wiki/Atmospheric_correction#References"><span class="tocnumber">7</span> <span class="toctext">References</span></a>
+<ul>
+<li class="toclevel-2 tocsection-11"><a href="https://grasswiki.osgeo.org/wiki/Atmospheric_correction#6S_algorithm"><span class="tocnumber">7.1</span> <span class="toctext">6S algorithm</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="https://grasswiki.osgeo.org/wiki/Atmospheric_correction#Spectral_radiance.2Freflectance"><span class="tocnumber">7.2</span> <span class="toctext">Spectral radiance/reflectance</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="https://grasswiki.osgeo.org/wiki/Atmospheric_correction#Whitepapers"><span class="tocnumber">7.3</span> <span class="toctext">Whitepapers</span></a></li>
+<li class="toclevel-2 tocsection-14"><a href="https://grasswiki.osgeo.org/wiki/Atmospheric_correction#Related_on-line_tools"><span class="tocnumber">7.4</span> <span class="toctext">Related on-line tools</span></a></li>
+<li class="toclevel-2 tocsection-15"><a href="https://grasswiki.osgeo.org/wiki/Atmospheric_correction#How_to_add_new_sensors_to_i.atcorr"><span class="tocnumber">7.5</span> <span class="toctext">How to add new sensors to i.atcorr</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-16"><a href="https://grasswiki.osgeo.org/wiki/Atmospheric_correction#See_also"><span class="tocnumber">8</span> <span class="toctext">See also</span></a></li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="Introduction">Introduction</span></h2>
+<p>Standard steps for pre-processing satellite images are:
+</p>
+<ol><li> Converting <b>Digital Numbers</b> (DN) to <b>Top-of-Atmosphere Radiances</b> (ToAR)
+<ul><li> DNs -- which are actually the pixel values -- are the result of the quantified amount of energy observed and measured at the sensor</li>
+<li> for <b>Landsat</b> imagery, apply the equation below or use the <span class="plainlinks"><a rel="nofollow" class="external text" href="https://grass.osgeo.org/grass78/manuals/i.landsat.toar.html">i.landsat.toar</a></span> module</li>
+<li> the <span class="plainlinks"><a rel="nofollow" class="external text" href="https://grass.osgeo.org/grass78/manuals/i.landsat.toar.html">i.landsat.toar</a></span> module supports all Landsat sensors including MSS, TM and ETM+</li>
+<li> for <b>WorldView</b> imagery, apply this equation with <span class="plainlinks"><a rel="nofollow" class="external text" href="https://grass.osgeo.org/grass78/manuals/r.mapcalc.html">r.mapcalc</a></span>:<br> <tt>L = Gain * DN * (abscalfactor/effective bandwidth) + Offset</tt><br> with the band specific "abscalfactor" and "effectiveBandwidth" being delivered with the imagery in the metadata file and the Gain and Offset are the absolute radiometric calibration band-dependent adjustment factors that are given in e.g. <a rel="nofollow" class="external text" href="https://dg-cms-uploads-production.s3.amazonaws.com/uploads/document/file/209/ABSRADCAL_FLEET_2016v0_Rel20170606.pdf">this DigitalGlobe document</a>. Note that these are not necessarily stagnant values and they are revisited annually.</li></ul></li>
+<li> Converting <b>ToA Radiances</b> to <b>Top-of-Canopy Reflectances</b> (ToCR) → use the <span class="plainlinks"><a rel="nofollow" class="external text" href="https://grass.osgeo.org/grass78/manuals/i.atcorr.html">i.atcorr</a></span> module
+<ul><li> the conversion to <i>Reflectances</i> attempts to assess for and remove atmospheric effects, a process known as <i>atmospheric correction</i></li>
+<li> the <i>atmospheric correction</i> step is quite a common topic of discussion in Remote Sensing. However, depending on the quality of the acquisition(s), it can be a complex process that does not always offer a great benefit, in terms of accuracy for subsequent processing steps (e.g. image segmentation and classification).</li></ul></li></ol>
+<p><b>Remember</b> to check if water areas are represented by values <code>&gt;0</code>, since reflectance is always positive. If you encounter negative reflectance values, you have a "cornichon" (pickle in English&nbsp;;-0). This means that the transformation equations used, do not correspond to the image processed.
+</p><p><br>
+An overview of options to get "corrected" Spectral Reflectances:
+</p>
+<pre> +------------------------------------------------------------------------------+
+ |                                                                              |
+ | Digital Numbers                                                              |
+ |        |                                                                     |
+ |  +-----v-----+                                                               |
+ |  |  i.*.toar | ---&gt; Reflectance                                              |
+ |  +-----+-----+     (uncorrected)~~~(DOS methods)--+                          |
+ |        |                 +                        |                          |
+ |    (-r flag)         (-r flag)                    +--&gt; "Corrected"           |
+ |        |                 |                        |     Reflectance          |
+ |        v           +-----v----+                   |                          |
+ |     Radiance ------&gt; i.atcorr +-------------------+                          |
+ |                    +----------+                                              |
+ |                                                                              |
+ +------------------------------------------------------------------------------+
+</pre>
+<h2><span class="mw-headline" id="Requirements">Requirements</span></h2>
+<ul><li> GRASS 6.4.0 or higher</li>
+<li> North Carolina sample dataset (location): <a rel="nofollow" class="external free" href="https://grass.osgeo.org/download/sample-data/">https://grass.osgeo.org/download/sample-data/</a></li></ul>
+<p>After downloading of the North Carolina dataset, it must be unzipped into your GIS database. When starting GRASS GIS, select this GIS database, open the ‘nc_spm_08’ dataset as LOCATION, and ‘PERMANENT’ as MAPSET. 
+</p>
+<h2><span class="mw-headline" id="Calculating_radiance_values">Calculating radiance values</span></h2>
+<p>The NC data set mapset contains, amongst others, a Landsat ETM+ image of 24th of May 2002. Every pixel of this image contains a DN or grey value. In order to be able to make calculations with satellite imagery, or compare values amongst different sensors, these values have to be converted to radiances or reflectances. The formulas to do this conversion are described here for Landsat images (or use <span class="plainlinks"><a rel="nofollow" class="external text" href="https://grass.osgeo.org/grass78/manuals/i.landsat.toar.html">i.landsat.toar</a></span>).
+</p><p><br>
+The conversion from DN values to top-of-atmosphere radiances is done as follows:
+</p><p><img class="mwe-math-fallback-image-inline tex" alt="L\lambda = \frac{L_{MAX}λ - L_{MIN}λ}{QCAL_{MAX} - QCAL_{MIN}} * (QCAL - QCAL_{MIN}) + L_{MIN}\lambda" src="./Atmospheric correction - GRASS-Wiki_files/93e0b4b18aa39ce5215253b2e2568be0.png">
+</p><p><br>
+</p>
+<ul>where:
+
+<ul><li> <img class="mwe-math-fallback-image-inline tex" alt="Lλ" src="./Atmospheric correction - GRASS-Wiki_files/d20caec3b48a1eef164cb4ca81ba2587.png"> - spectral Radiance at the sensor's aperture in watts/(meter squared * ster * μm), the apparent radiance as seen by the satellite sensor&nbsp;;</li>
+<li> <img class="mwe-math-fallback-image-inline tex" alt="QCAL" src="./Atmospheric correction - GRASS-Wiki_files/80005ca855f872ae32364737bc12aad2.png"> - the quantized calibrated pixel value in <img class="mwe-math-fallback-image-inline tex" alt="DN" src="./Atmospheric correction - GRASS-Wiki_files/f7373a2c8ea4b1cafd7ab9e8c294331d.png">&nbsp;;</li>
+<li> <img class="mwe-math-fallback-image-inline tex" alt="LMINλ" src="./Atmospheric correction - GRASS-Wiki_files/8e857b0646b4564b46deee1bf2a6da05.png"> - the spectral radiance that is scaled to <img class="mwe-math-fallback-image-inline tex" alt="QCALMIN" src="./Atmospheric correction - GRASS-Wiki_files/592cf5e619c2735c135d5ae6d9f0703e.png"> in watts/(meter squared * ster * μm)&nbsp;;</li>
+<li> <img class="mwe-math-fallback-image-inline tex" alt="LMAXλ" src="./Atmospheric correction - GRASS-Wiki_files/fc86b6c8e4ea42690aeed11202185b96.png"> - the spectral radiance that is scaled to <img class="mwe-math-fallback-image-inline tex" alt="QCALMAX" src="./Atmospheric correction - GRASS-Wiki_files/13c38f5750f783c1ec9f0c63206c65c0.png"> in watts/(meter squared * ster * μm)&nbsp;;</li>
+<li> <img class="mwe-math-fallback-image-inline tex" alt="QCALMINM" src="./Atmospheric correction - GRASS-Wiki_files/04c72ada5e9d34f8f15ba4c5d50f0ee9.png"> - the minimum quantized calibrated pixel value (corresponding to <img class="mwe-math-fallback-image-inline tex" alt="LMINλ" src="./Atmospheric correction - GRASS-Wiki_files/8e857b0646b4564b46deee1bf2a6da05.png">) in <img class="mwe-math-fallback-image-inline tex" alt="DN" src="./Atmospheric correction - GRASS-Wiki_files/f7373a2c8ea4b1cafd7ab9e8c294331d.png">&nbsp;;</li>
+<li> <img class="mwe-math-fallback-image-inline tex" alt="QCALMAX" src="./Atmospheric correction - GRASS-Wiki_files/13c38f5750f783c1ec9f0c63206c65c0.png"> - the maximum quantized calibrated pixel value (corresponding to <img class="mwe-math-fallback-image-inline tex" alt="LMAXλ" src="./Atmospheric correction - GRASS-Wiki_files/fc86b6c8e4ea42690aeed11202185b96.png">) in <img class="mwe-math-fallback-image-inline tex" alt="DN=255" src="./Atmospheric correction - GRASS-Wiki_files/423d8d56d4549905dbb6dcc743bf7d3c.png">.</li></ul>
+</ul>
+<p><br>
+<img class="mwe-math-fallback-image-inline tex" alt="LMINλ" src="./Atmospheric correction - GRASS-Wiki_files/8e857b0646b4564b46deee1bf2a6da05.png"> and <img class="mwe-math-fallback-image-inline tex" alt="LMAXλ" src="./Atmospheric correction - GRASS-Wiki_files/fc86b6c8e4ea42690aeed11202185b96.png"> are the radiances related to the minimal and maximal <img class="mwe-math-fallback-image-inline tex" alt="DN" src="./Atmospheric correction - GRASS-Wiki_files/f7373a2c8ea4b1cafd7ab9e8c294331d.png"> value, and are reported in the metadata file for each image, or in the table 1. High gain or low gain is also reported in the metadata file of each Landsat image. The minimal <img class="mwe-math-fallback-image-inline tex" alt="DN" src="./Atmospheric correction - GRASS-Wiki_files/f7373a2c8ea4b1cafd7ab9e8c294331d.png"> value (<img class="mwe-math-fallback-image-inline tex" alt="QCALMIN" src="./Atmospheric correction - GRASS-Wiki_files/592cf5e619c2735c135d5ae6d9f0703e.png">) is 1 for Landsat ETM+ images (1), and the maximal <img class="mwe-math-fallback-image-inline tex" alt="DN" src="./Atmospheric correction - GRASS-Wiki_files/f7373a2c8ea4b1cafd7ab9e8c294331d.png"> value (<img class="mwe-math-fallback-image-inline tex" alt="QCALMAX" src="./Atmospheric correction - GRASS-Wiki_files/13c38f5750f783c1ec9f0c63206c65c0.png">) is 255. <img class="mwe-math-fallback-image-inline tex" alt="QCAL" src="./Atmospheric correction - GRASS-Wiki_files/80005ca855f872ae32364737bc12aad2.png"> is the <img class="mwe-math-fallback-image-inline tex" alt="DN" src="./Atmospheric correction - GRASS-Wiki_files/f7373a2c8ea4b1cafd7ab9e8c294331d.png"> value for every separate pixel in the Landsat image.
+</p><p><br>
+Accessing the metadata:
+</p>
+<pre><span class="plainlinks"><a rel="nofollow" class="external text" href="https://grass.osgeo.org/grass78/manuals/r.info.html">r.info</a></span> <code class="mw-highlight" dir="ltr">lsat7_2002_xx</code>
+</pre>
+<p>Under ‘comments’, the maximal and minimal radiance (LMAX and LMIN) for each band are given. 
+</p><p>Power users may use this for nicely readable output (example for channel 1):
+</p>
+<pre><code class="mw-highlight" dir="ltr"><span class="nv">CHAN</span><span class="o">=</span>1</code>
+<span class="plainlinks"><a rel="nofollow" class="external text" href="https://grass.osgeo.org/grass78/manuals/r.info.html">r.info</a></span> <code class="mw-highlight" dir="ltr">lsat7_2002_<span class="si">${</span><span class="nv">CHAN</span><span class="si">}</span><span class="m">0</span> -h <span class="p">|</span> tr <span class="s1">'\n'</span> <span class="s1">' '</span>  <span class="p">|</span> sed <span class="s1">'s+ ++g'</span> <span class="p">|</span> tr <span class="s1">':'</span> <span class="s1">'\n'</span> <span class="p">|</span> grep <span class="s2">"LMIN_BAND</span><span class="si">${</span><span class="nv">CHAN</span><span class="si">}</span><span class="s2">\|LMAX_BAND</span><span class="si">${</span><span class="nv">CHAN</span><span class="si">}</span><span class="s2">"</span></code>
+</pre>
+<p>Conversion to radiance (this calculation is done for band 1, for the other bands, the numbers in italics need to be replaced with their correct values):
+</p>
+<pre><span class="plainlinks"><a rel="nofollow" class="external text" href="https://grass.osgeo.org/grass78/manuals/g.region.html">g.region</a></span> <code class="mw-highlight" dir="ltr"><span class="nv">rast</span><span class="o">=</span>lsat7_2002_10 -p</code>
+<span class="plainlinks"><a rel="nofollow" class="external text" href="https://grass.osgeo.org/grass78/manuals/r.mapcalc.html">r.mapcalc</a></span> <code class="mw-highlight" dir="ltr"><span class="s2">"lsat7_2002_10_rad=((''191.6'' - (''-6.2'')) / (255.0 - 1.0)) * (lsat7_2002_10 - 1.0) + (''-6.2'')"</span></code>
+</pre>
+<p>For faster computations, use an integer DEM:
+</p>
+<pre> <span class="plainlinks"><a rel="nofollow" class="external text" href="https://grass.osgeo.org/grass78/manuals/r.mapcalc.html">r.mapcalc</a></span> <code class="mw-highlight" dir="ltr"><span class="s2">"elev_int = round(elevation)"</span></code>
+</pre>
+<p>Find mean elevation to initialize computations (needed in 'icnd' file below)
+</p>
+<pre><span class="plainlinks"><a rel="nofollow" class="external text" href="https://grass.osgeo.org/grass78/manuals/r.univar.html">r.univar</a></span> <code class="mw-highlight" dir="ltr">elev_int</code>
+</pre>
+<h2><span class="mw-headline" id="Estimating_the_overpass_time">Estimating the overpass time</span></h2>
+<p>This value is needed for the control file. For details, refer to Wikipedia's entry on <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/Decimal_time#Scientific_decimal_time">Scientific decimal time</a>.
+In case this parameter is not reported in the metadata file, we have two ways to obtain it.
+</p>
+<h3><span class="mw-headline" id="From_sun_position">From sun position</span></h3>
+<p>The satellite overpass time can be estimated rather precisely from the sun position reported in metadata using <span class="plainlinks"><a rel="nofollow" class="external text" href="https://grass.osgeo.org/grass78/manuals/r.sunmask.html">r.sunmask</a></span>.
+The <a rel="nofollow" class="external text" href="http://www.grassbook.org/wp-content/uploads/ncexternal/landsat/2002/p016r035_7x20020524.met.gz">metadata file</a> for the following example contains: <code class="mw-highlight" dir="ltr"><span class="nv">SUN_AZIMUTH</span> <span class="o">=</span> 120.8810347, <span class="nv">SUN_ELEVATION</span> <span class="o">=</span> 64.7730999</code>.
+</p>
+<pre># iteratively change hour and minutes to obtain a good result, timezone needs to be correct of course
+<span class="plainlinks"><a rel="nofollow" class="external text" href="https://grass.osgeo.org/grass78/manuals/r.sunmask.html">r.sunmask</a></span>  <code class="mw-highlight" dir="ltr">-s <span class="nv">elev</span><span class="o">=</span>elevation <span class="nv">out</span><span class="o">=</span>dummy <span class="nv">year</span><span class="o">=</span><span class="m">2002</span> <span class="nv">month</span><span class="o">=</span><span class="m">5</span> <span class="nv">day</span><span class="o">=</span><span class="m">24</span> <span class="nv">hour</span><span class="o">=</span><span class="m">10</span> <span class="nv">min</span><span class="o">=</span><span class="m">42</span> <span class="nv">sec</span><span class="o">=</span><span class="m">7</span> <span class="nv">timezone</span><span class="o">=</span>-5</code>
+</pre>
+<p>The above command reports:
+</p>
+<pre>Solar position: sun azimuth: 121.342461, sun angle above horz.(refraction corrected): 65.396652
+</pre>
+<p>The resulting overpass local time <code>10:42:07</code> corresponds to <code>15:42</code> in GMT which corresponds to <code>15.70</code> in decimal GMT hours (decimal minutes: <img class="mwe-math-fallback-image-inline tex" alt="42 * 100 / 60" src="./Atmospheric correction - GRASS-Wiki_files/b5083ebca14ae29428c54186d408a64a.png">).
+</p>
+<h3><span class="mw-headline" id="From_NASA_web_tool">From NASA web tool</span></h3>
+<p>The <a rel="nofollow" class="external text" href="http://cloudsgate2.larc.nasa.gov/cgi-bin/predict/predict.cgi">NASA LaRC Satellite Overpass Predictor</a> can compute satellite overpass time from d<i>ate of acquisition</i> and <i>scene center coordinates</i>. The <a rel="nofollow" class="external text" href="http://www.grassbook.org/wp-content/uploads/ncexternal/landsat/2002/p016r035_7x20020524.met.gz">metadata file</a> for the following example contains: <code class="mw-highlight" dir="ltr"><span class="nv">ACQUISITION_DATE</span> <span class="o">=</span> 2002-05-24, <span class="nv">SCENE_CENTER_LAT</span> <span class="o">=</span> +36.0512847, <span class="nv">SCENE_CENTER_LON</span> <span class="o">=</span> -79.3280820</code>.
+</p>
+<ol><li> Select the World zone in the bottom-right side of the page and click <code>Go &gt;&gt;</code></li>
+<li> Insert Lat/Long coordinates (decimal degrees, without <i>plus</i> sign but with <i>minus</i> sign)</li>
+<li> Select the proper satellite</li>
+<li> Insert the date of acquisition</li>
+<li> <i>Optional:</i> select "Day" or "Night" to restrict computation to (local) day/night overpass of the satellite</li></ol>
+<p><i>Example:</i> Calculation for NC Landsat scenes: see <a rel="nofollow" class="external text" href="http://www.grassbook.org/wp-content/uploads/ncexternal/landsat/landsat_overpass_time_list_NC.txt">here</a>
+</p><p>--- For LANDSAT only ---
+</p><p>USGS provide the <a rel="nofollow" class="external text" href="http://landsat.usgs.gov/consumer.php">Landsat Bulk Metadata Service</a> web page where is possible to extract metadata (included overpass time) for all the Landsat missions.
+</p>
+<h2><span class="mw-headline" id="Atmospheric_correction">Atmospheric correction</span></h2>
+<p>Radiance values can be converted to reflectance values in undergoing an atmospheric correction by applying the <img class="mwe-math-fallback-image-inline tex" alt="6S" src="./Atmospheric correction - GRASS-Wiki_files/502effd12b393252d3831ef61828ad22.png"> algorithm available in <span class="plainlinks"><a rel="nofollow" class="external text" href="https://grass.osgeo.org/grass78/manuals/i.atcorr.html">i.atcorr</a></span>. The algorithm will transform the Top-of-Atmosphere radiance values to Top-of-Canopy reflectance values using predefined information on the aerosol content and atmospheric composition of the time the image was taken. What follows describes the method to use this algorithm in GRASS GIS. Again, only calculations for band 1 are demonstrated here, and the number(s) to be changed for indicating other spectral bands, are <span style="color:#FF0000">red</span>. The <code>icnd_lsat1.txt</code> control file consists of the following parameters, and is written with a text editor:
+</p>
+<pre>8                          # indicates that it is an ETM+ image
+05 24 15.67 -78.691 35.749 # image taken on the 24th of May, at 15:42 GMT in decimals; the center of the image lies at 78.691°W and 35.749°N 
+2                          # the midlatitude summer atmospheric model
+1                          # the continental aerosol model
+50                         # the visibility for the aerosol model [km]
+-0.110                     # the terrain lies 110 meters above sea level [km] * -1
+-1000                      # image taken of a satellite sensor (1000)
+<span style="color:#FF0000">61</span>                         # spectral band, here 1: blue
+</pre>
+<p>Alternatively, in case visibility maps are not available, an Aerosol Optical Depth estimation at 550nm can be used. The control file should be altered accordingly by entering 0 for the visibility and, in a following line, entering the aerosol optical depth. The control file should be structured as follows:
+</p>
+<pre>8                          # indicates that it is an ETM+ image
+05 24 15.67 -78.691 35.749 # image taken on the 24th of May, at 15:42 GMT in decimals; the center of the image lies at 78.691°W and 35.749°N 
+2                          # the midlatitude summer atmospheric model
+1                          # the continental aerosol model
+0                          # set visibility = 0
+0.112                      # e.g. aerosol optical depth
+-0.110                     # the terrain lies 110 meters above sea level [km] * -1
+-1000                      # image taken of a satellite sensor (1000)
+<span style="color:#FF0000">61</span>                         # spectral band, here 1: blue
+</pre>
+<p><br>
+This file is then used in the <span class="plainlinks"><a rel="nofollow" class="external text" href="https://grass.osgeo.org/grass78/manuals/i.atcorr.html">i.atcorr</a></span> module:
+</p>
+<pre><span class="plainlinks"><a rel="nofollow" class="external text" href="https://grass.osgeo.org/grass78/manuals/i.atcorr.html">i.atcorr</a></span> <code class="mw-highlight" dir="ltr">-a -o <span class="nv">iimg</span><span class="o">=</span>lsat7_2002_10_rad <span class="nv">ialt</span><span class="o">=</span>elev_int <span class="nv">icnd</span><span class="o">=</span>icdn_lsat1.txt <span class="nv">oimg</span><span class="o">=</span>lsat7_2002_10_atcorr</code>
+</pre>
+<p>or, using GRASS 7.x:
+</p>
+<pre><span class="plainlinks"><a rel="nofollow" class="external text" href="https://grass.osgeo.org/grass78/manuals/i.atcorr.html">i.atcorr</a></span> <code class="mw-highlight" dir="ltr">-a <span class="nv">input</span><span class="o">=</span>lsat7_2002_10_rad <span class="nv">elevation</span><span class="o">=</span>elev_int <span class="nv">parameters</span><span class="o">=</span>icdn_lsat1.txt <span class="nv">output</span><span class="o">=</span>lsat7_2002_10_atcorr</code>
+</pre>
+<p>Where:
+</p>
+<ul><li> <tt><b>-a</b></tt>   refers to a Landsat image taken after July 2000</li>
+<li> <tt><b>-o</b></tt>   activates the cache acceleration (GRASS 6.x only)</li>
+<li> <tt><b>iimg/input</b></tt> is the image to be corrected</li>
+<li> <tt><b>ialt/elevation</b></tt> is the altitude map which overrides the initialization value of 110 meters</li>
+<li> <tt><b>icnd/parameters</b></tt> is the path to the icnd.txt file</li>
+<li> <tt><b>oimg/output</b></tt> is the name of the output image</li></ul>
+<p>Detailed information can be found in <span class="plainlinks"><a rel="nofollow" class="external text" href="https://grass.osgeo.org/grass78/manuals/i.atcorr.html">i.atcorr</a></span>'s manual.
+</p><p><b>Note,</b> <span class="plainlinks"><a rel="nofollow" class="external text" href="https://grass.osgeo.org/grass78/manuals/i.atcorr.html">i.atcorr</a></span> wont complain if the defined elevation model (parameter <code>elevation=</code>) does not cover the extent of the Landsat scene that is the subject of the process -- it will result in NaN's. <i>[Maybe this can be requested as an enhancement?]</i>
+</p>
+<h2><span class="mw-headline" id="Sources_for_aerosol_optical_depth_.28AOD.29_estimations">Sources for aerosol optical depth (AOD) estimations</span></h2>
+<ul><li> <a rel="nofollow" class="external text" href="http://aeronet.gsfc.nasa.gov/">AERONET</a> - provides globally distributed observations of spectral aerosol optical depth (AOD), inversion products, and precipitable water in diverse aerosol regimes.</li>
+<li> MODIS MOD08 product <a rel="nofollow" class="external text" href="http://modis.gsfc.nasa.gov/data/dataprod/dataproducts.php?MOD_NUMBER=08">MOD08 - Gridded Atmospheric Product</a>.
+<ul><li> Daily MOD08 products can be downloaded directly from NASA's FTP server: <a rel="nofollow" class="external text" href="ftp://ladsweb.nascom.nasa.gov/allData/51/MOD08_D3/"><b>ftp://ladsweb.nascom.nasa.gov/allData/51/MOD08_D3/</b></a>.</li>
+<li> File and layer specifications are available, for example, at <a rel="nofollow" class="external text" href="http://www.atmos.washington.edu/~robwood/modis/filespecs/MOD08_D3.CDL.fs">MODIS HDF File Specification MOD08_D3: MODIS Level 3 Daily Atmosphere Gridded Product</a></li>
+<li> The layer <b>Optical_Depth_Land_And_Ocean_Mean</b>, described as <i>Aerosol Optical Thickness at 0.55 microns for both Ocean (best) and Land (corrected): Mean</i>, can be probably used as an input for <span class="plainlinks"><a rel="nofollow" class="external text" href="https://grass.osgeo.org/grass78/manuals/i.atcorr.html">i.atcorr</a></span>. <b>Note,</b> the layer's values have to be scaled by using the scaling factor <i>Optical_Depth_Land_And_Ocean_Mean:scale_factor =</i> <b>0.001d</b> as reported in the specifications.</li></ul></li>
+<li> <a rel="nofollow" class="external text" href="http://www.cesbio.ups-tlse.fr/multitemp/?p=1710">How to estimate Aerosol Optical Thickness</a></li></ul>
+<h3><span class="mw-headline" id="T.CE.BFD.CE.BF">TοDο</span></h3>
+<ul><li> Cross-check with <a rel="nofollow" class="external text" href="http://atmcorr.gsfc.nasa.gov/">Landsat Atmospheric Correction Parameter Calculator</a></li>
+<li> understand if the <a rel="nofollow" class="external text" href="http://modis.gsfc.nasa.gov/data/dataprod/dataproducts.php?MOD_NUMBER=04">MODIS Aerosol Product (MOD04)</a> could be useful to estimate the visibility for the aerosol model.</li>
+<li> provide an example on using <a rel="nofollow" class="external text" href="http://modis.gsfc.nasa.gov/data/dataprod/dataproducts.php?MOD_NUMBER=08">MODIS Gridded Atmospheric Product (MOD08)</a>.</li>
+<li> explain if it is possible and how to use <i>Rayleigh Optical Depths estimated at 0km altitude for six different atmosphere models</i> from the paper <a rel="nofollow" class="external text" href="http://www.opticsinfobase.org/ao/abstract.cfm?uri=ao-34-15-2765">Rayleigh-scattering calculations for the terrestrial atmosphere</a> by Anthony Buchholz, table 4, page 2270</li></ul>
+<h2><span class="mw-headline" id="References">References</span></h2>
+<h3><span class="mw-headline" id="6S_algorithm">6S algorithm</span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://6s.ltdri.org/">6S Web site</a></li>
+<li> <a rel="nofollow" class="external text" href="http://modis-sr.ltdri.org/">Land Surface Reflectance Science Computing Facility website - 6S</a></li></ul>
+<h3><span class="mw-headline" id="Spectral_radiance.2Freflectance">Spectral radiance/reflectance</span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://landsat.usgs.gov/how_is_radiance_calculated.php">How is radiance calculated?</a>, question on USGS' <a rel="nofollow" class="external text" href="http://landsat.usgs.gov/tools_faq.php">Landsat Missions - Frequently Asked Questions</a></li>
+<li> (1)  <a rel="nofollow" class="external free" href="http://landsathandbook.gsfc.nasa.gov/handbook/handbook_htmls/chapter11/chapter11.html">http://landsathandbook.gsfc.nasa.gov/handbook/handbook_htmls/chapter11/chapter11.html</a></li>
+<li> (2)  <a rel="nofollow" class="external free" href="http://landsat.usgs.gov/documents/L5TM_postcal_v11.pdf">http://landsat.usgs.gov/documents/L5TM_postcal_v11.pdf</a></li>
+<li> WorldView: <a rel="nofollow" class="external free" href="https://dg-cms-uploads-production.s3.amazonaws.com/uploads/document/file/209/ABSRADCAL_FLEET_2016v0_Rel20170606.pdf">https://dg-cms-uploads-production.s3.amazonaws.com/uploads/document/file/209/ABSRADCAL_FLEET_2016v0_Rel20170606.pdf</a></li></ul>
+<h3><span class="mw-headline" id="Whitepapers">Whitepapers</span></h3>
+<ul><li> Various <a rel="nofollow" class="external text" href="http://apollomapping.com/about-us/whitepapers">Whitepapers</a> about conversion and atmospheric correction of High Resolution Satellite Imagery</li>
+<li>  Song, C., Woodcock, C.E., Seto, K.C., Lenney, M.P., Macomber, S.A., 2001. Classification and Change Detection Using Landsat TM Data: When and How to Correct Atmospheric Effects? Remote Sensing of Environment 75, 230-244. <a rel="nofollow" class="external text" href="http://www.unc.edu/courses/2008spring/geog/577/001/www/Song01_RSE.pdf">PDF</a></li></ul>
+<h3><span class="mw-headline" id="Related_on-line_tools">Related on-line tools</span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="http://cloudsgate2.larc.nasa.gov/cgi-bin/predict/predict.cgi">NASA LaRC Satellite Overpass Predictor</a></li>
+<li> <a rel="nofollow" class="external text" href="http://landsat.usgs.gov/consumer.php">Landsat Bulk Metadata Service</a></li>
+<li> NASA's <a rel="nofollow" class="external text" href="http://atmcorr.gsfc.nasa.gov/">Atmospheric Correction Parameter Calculator</a></li></ul>
+<h3><span class="mw-headline" id="How_to_add_new_sensors_to_i.atcorr">How to add new sensors to i.atcorr</span></h3>
+<p>How to add new sensors to <span class="plainlinks"><a rel="nofollow" class="external text" href="https://grass.osgeo.org/grass78/manuals/i.atcorr.html">i.atcorr</a></span>:
+</p>
+<ul>
+<ul><li> see <a rel="nofollow" class="external free" href="http://trac.osgeo.org/grass/browser/grass/trunk/imagery/i.atcorr/README">http://trac.osgeo.org/grass/browser/grass/trunk/imagery/i.atcorr/README</a></li></ul>
+</ul>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul><li> Terrain correction: <span class="plainlinks"><a rel="nofollow" class="external text" href="https://grass.osgeo.org/grass78/manuals/i.topo.corr.html">i.topo.corr</a></span></li></ul>
+
+<!-- 
+NewPP limit report
+Cached time: 20200531215654
+Cache expiry: 86400
+Dynamic content: false
+CPU time usage: 0.172 seconds
+Real time usage: 2.967 seconds
+Preprocessor visited node count: 509/1000000
+Preprocessor generated node count: 0/1000000
+Post‐expand include size: 2252/2097152 bytes
+Template argument size: 412/2097152 bytes
+Highest expansion depth: 2/40
+Expensive parser function count: 0/100
+-->
+
+<!-- 
+Transclusion expansion time report (%,ms,calls,template)
+100.00% 2882.053      1 - -total
+  0.40%   11.543     23 - Template:Cmd
+-->
+
+<!-- Saved in parser cache with key grass_wiki:pcache:idhash:2022-0!*!0!!en!*!*!math=0 and timestamp 20200531215651 and revision id 26157
+ -->
+</div>					<div class="printfooter">
+						Retrieved from "<a dir="ltr" href="https://grasswiki.osgeo.org/w/index.php?title=Atmospheric_correction&amp;oldid=26157">https://grasswiki.osgeo.org/w/index.php?title=Atmospheric_correction&amp;oldid=26157</a>"					</div>
+				<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks"><a href="https://grasswiki.osgeo.org/wiki/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="https://grasswiki.osgeo.org/wiki/Category:Documentation" title="Category:Documentation">Documentation</a></li><li><a href="https://grasswiki.osgeo.org/wiki/Category:Tutorial" title="Category:Tutorial">Tutorial</a></li><li><a href="https://grasswiki.osgeo.org/wiki/Category:Image_processing" title="Category:Image processing">Image processing</a></li></ul></div></div>				<div class="visualClear"></div>
+							</div>
+		</div>
+		<div id="mw-navigation">
+			<h2>Navigation menu</h2>
+
+			<div id="mw-head">
+									<div id="p-personal" role="navigation" class="" aria-labelledby="p-personal-label">
+						<h3 id="p-personal-label">Personal tools</h3>
+						<ul>
+							<li id="pt-login"><a href="https://grasswiki.osgeo.org/w/index.php?title=Special:UserLogin&amp;returnto=Atmospheric+correction" title="You are encouraged to log in; however, it is not mandatory [alt-shift-o]" accesskey="o">Log in</a></li><li id="pt-createaccount"><a href="https://grasswiki.osgeo.org/wiki/Special:RequestAccount" title="You are encouraged to create an account and log in; however, it is not mandatory">Request account</a></li>						</ul>
+					</div>
+									<div id="left-navigation">
+										<div id="p-namespaces" role="navigation" class="vectorTabs" aria-labelledby="p-namespaces-label">
+						<h3 id="p-namespaces-label">Namespaces</h3>
+						<ul>
+															<li id="ca-nstab-main" class="selected"><span><a href="https://grasswiki.osgeo.org/wiki/Atmospheric_correction" title="View the content page [alt-shift-c]" accesskey="c">Page</a></span></li>
+															<li id="ca-talk"><span><a href="https://grasswiki.osgeo.org/wiki/Talk:Atmospheric_correction" title="Discussion about the content page [alt-shift-t]" accesskey="t" rel="discussion">Discussion</a></span></li>
+													</ul>
+					</div>
+										<div id="p-variants" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-variants-label">
+												<h3 id="p-variants-label" tabindex="0">
+							<span>Variants</span><a href="https://grasswiki.osgeo.org/wiki/Atmospheric_correction#" tabindex="-1"></a>
+						</h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+									</div>
+				<div id="right-navigation">
+										<div id="p-views" role="navigation" class="vectorTabs" aria-labelledby="p-views-label">
+						<h3 id="p-views-label">Views</h3>
+						<ul>
+															<li id="ca-view" class="selected"><span><a href="https://grasswiki.osgeo.org/wiki/Atmospheric_correction">Read</a></span></li>
+															<li id="ca-viewsource"><span><a href="https://grasswiki.osgeo.org/w/index.php?title=Atmospheric_correction&amp;action=edit" title="This page is protected.
+You can view its source [alt-shift-e]" accesskey="e">View source</a></span></li>
+															<li id="ca-history" class="collapsible"><span><a href="https://grasswiki.osgeo.org/w/index.php?title=Atmospheric_correction&amp;action=history" title="Past revisions of this page [alt-shift-h]" accesskey="h">View history</a></span></li>
+													</ul>
+					</div>
+										<div id="p-cactions" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-cactions-label" style="">
+						<h3 id="p-cactions-label" tabindex="0"><span>More</span><a href="https://grasswiki.osgeo.org/wiki/Atmospheric_correction#" tabindex="-1"></a></h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+										<div id="p-search" role="search">
+						<h3>
+							<label for="searchInput">Search</label>
+						</h3>
+
+						<form action="https://grasswiki.osgeo.org/w/index.php" id="searchform">
+							<div id="simpleSearch">
+							<input type="search" name="search" placeholder="Search" title="Search GRASS-Wiki [alt-shift-f]" accesskey="f" id="searchInput" tabindex="1" autocomplete="off"><input type="hidden" value="Special:Search" name="title"><input type="submit" name="go" value="Go" title="Go to a page with this exact name if it exists" id="searchButton" class="searchButton">							</div>
+						</form>
+					</div>
+									</div>
+			</div>
+			<div id="mw-panel">
+				<div id="p-logo" role="banner"><a class="mw-wiki-logo" href="https://grasswiki.osgeo.org/wiki/Main_Page" title="Visit the main page"></a></div>
+						<div class="portal" role="navigation" id="p-navigation" aria-labelledby="p-navigation-label">
+			<h3 id="p-navigation-label">Navigation</h3>
+
+			<div class="body">
+									<ul>
+						<li id="n-mainpage"><a href="https://grasswiki.osgeo.org/wiki/GRASS-Wiki" title="Visit the main page [alt-shift-z]" accesskey="z">Main Page</a></li><li id="n-Community"><a href="https://grasswiki.osgeo.org/wiki/GRASS_Community">Community</a></li><li id="n-Development"><a href="https://grasswiki.osgeo.org/wiki/Development">Development</a></li><li id="n-Documents"><a href="https://grasswiki.osgeo.org/wiki/Documents">Documents</a></li><li id="n-GRASS-Help"><a href="https://grasswiki.osgeo.org/wiki/GRASS_Help">GRASS Help</a></li><li id="n-recentchanges"><a href="https://grasswiki.osgeo.org/wiki/Special:RecentChanges" title="A list of recent changes in the wiki [alt-shift-r]" accesskey="r">Recent changes</a></li><li id="n-help"><a href="https://grasswiki.osgeo.org/wiki/Help" title="The place to find out">Help</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id="p-tb" aria-labelledby="p-tb-label">
+			<h3 id="p-tb-label">Tools</h3>
+
+			<div class="body">
+									<ul>
+						<li id="t-whatlinkshere"><a href="https://grasswiki.osgeo.org/wiki/Special:WhatLinksHere/Atmospheric_correction" title="A list of all wiki pages that link here [alt-shift-j]" accesskey="j">What links here</a></li><li id="t-recentchangeslinked"><a href="https://grasswiki.osgeo.org/wiki/Special:RecentChangesLinked/Atmospheric_correction" title="Recent changes in pages linked from this page [alt-shift-k]" accesskey="k">Related changes</a></li><li id="t-specialpages"><a href="https://grasswiki.osgeo.org/wiki/Special:SpecialPages" title="A list of all special pages [alt-shift-q]" accesskey="q">Special pages</a></li><li id="t-print"><a href="https://grasswiki.osgeo.org/w/index.php?title=Atmospheric_correction&amp;printable=yes" rel="alternate" title="Printable version of this page [alt-shift-p]" accesskey="p">Printable version</a></li><li id="t-permalink"><a href="https://grasswiki.osgeo.org/w/index.php?title=Atmospheric_correction&amp;oldid=26157" title="Permanent link to this revision of the page">Permanent link</a></li><li id="t-info"><a href="https://grasswiki.osgeo.org/w/index.php?title=Atmospheric_correction&amp;action=info" title="More information about this page">Page information</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id="p-lang" aria-labelledby="p-lang-label">
+			<h3 id="p-lang-label">In other languages</h3>
+
+			<div class="body">
+									<ul>
+						<li class="interwiki-es"><a href="https://grasswiki.osgeo.org/wiki/Atmospheric_correction/es">español</a></li><li class="interwiki-pt-br"><a href="https://grasswiki.osgeo.org/wiki/Atmospheric_correction/pt-br">português do Brasil</a></li>					</ul>
+							</div>
+		</div>
+				</div>
+		</div>
+		<div id="footer" role="contentinfo">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 8 April 2020, at 06:14.</li>
+											<li id="footer-info-viewcount">This page has been accessed 146,837 times.</li>
+											<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="http://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.2</a> unless otherwise noted.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="https://grasswiki.osgeo.org/wiki/GRASS-Wiki:Privacy_policy" title="GRASS-Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="https://grasswiki.osgeo.org/wiki/GRASS-Wiki:About" title="GRASS-Wiki:About">About GRASS-Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="https://grasswiki.osgeo.org/wiki/GRASS-Wiki:General_disclaimer" title="GRASS-Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+											<li id="footer-copyrightico">
+							<a href="http://www.gnu.org/copyleft/fdl.html"><img src="./Atmospheric correction - GRASS-Wiki_files/gnu-fdl.png" alt="GNU Free Documentation License 1.2" width="88" height="31"></a>						</li>
+											<li id="footer-poweredbyico">
+							<a href="https://www.mediawiki.org/"><img src="./Atmospheric correction - GRASS-Wiki_files/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" srcset="/w/resources/assets/poweredby_mediawiki_132x47.png 1.5x, /w/resources/assets/poweredby_mediawiki_176x62.png 2x" width="88" height="31"></a>						</li>
+									</ul>
+						<div style="clear:both"></div>
+		</div>
+		<script>(window.RLQ=window.RLQ||[]).push(function(){mw.loader.state({"user":"ready","user.groups":"ready"});mw.loader.load(["mediawiki.toc","mediawiki.action.view.postEdit","site","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.searchSuggest"]);});</script><script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgBackendResponseTime":135});});</script>
+	
+
+<div id="free_vpn_container" style="display: none;">            <div class="free-vpn_wrap">                <div class="free-vpn_rate-popup">                    <div class="free-vpn_close-btn">                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">                            <g>                                <g>                                    <path fill="#afafaf" d="M505.943,6.058c-8.077-8.077-21.172-8.077-29.249,0L6.058,476.693c-8.077,8.077-8.077,21.172,0,29.249                                        C10.096,509.982,15.39,512,20.683,512c5.293,0,10.586-2.019,14.625-6.059L505.943,35.306                                        C514.019,27.23,514.019,14.135,505.943,6.058z"></path>                                </g>                            </g>                            <g>                                <g>                                    <path fill="#afafaf" d="M505.942,476.694L35.306,6.059c-8.076-8.077-21.172-8.077-29.248,0c-8.077,8.076-8.077,21.171,0,29.248l470.636,470.636                                        c4.038,4.039,9.332,6.058,14.625,6.058c5.293,0,10.587-2.019,14.624-6.057C514.018,497.866,514.018,484.771,505.942,476.694z"></path>                                </g>                            </g>                        </svg>                    </div>                    <div class="free-vpn_logo"></div>                    <div class="free-vpn_title">Free VPN</div>                    <div class="free-vpn_text">                        Enjoyed our app? Give us 5 stars!                    </div>                    <div class="free-vpn_stars">                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 46.354 46.354" style="enable-background:new 0 0 46.354 46.354;" xml:space="preserve"><g><g>                            <path d="M21.57,2.049c0.303-0.612,0.927-1,1.609-1c0.682,0,1.307,0.388,1.609,1l5.771,11.695c0.261,0.529,0.767,0.896,1.352,0.981   L44.817,16.6c0.677,0.098,1.237,0.572,1.448,1.221c0.211,0.649,0.035,1.363-0.454,1.839l-9.338,9.104   c-0.423,0.412-0.616,1.006-0.517,1.588l2.204,12.855c0.114,0.674-0.161,1.354-0.715,1.756c-0.553,0.4-1.284,0.453-1.89,0.137   l-11.544-6.07c-0.522-0.275-1.147-0.275-1.67,0l-11.544,6.069c-0.604,0.317-1.337,0.265-1.89-0.136   c-0.553-0.401-0.829-1.082-0.714-1.756l2.204-12.855c0.1-0.582-0.094-1.176-0.517-1.588L0.542,19.66   c-0.489-0.477-0.665-1.19-0.454-1.839c0.211-0.649,0.772-1.123,1.449-1.221l12.908-1.875c0.584-0.085,1.09-0.452,1.351-0.982   L21.57,2.049z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFD325"></path>                        </g></g> </svg>                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 46.354 46.354" style="enable-background:new 0 0 46.354 46.354;" xml:space="preserve"><g><g>                            <path d="M21.57,2.049c0.303-0.612,0.927-1,1.609-1c0.682,0,1.307,0.388,1.609,1l5.771,11.695c0.261,0.529,0.767,0.896,1.352,0.981   L44.817,16.6c0.677,0.098,1.237,0.572,1.448,1.221c0.211,0.649,0.035,1.363-0.454,1.839l-9.338,9.104   c-0.423,0.412-0.616,1.006-0.517,1.588l2.204,12.855c0.114,0.674-0.161,1.354-0.715,1.756c-0.553,0.4-1.284,0.453-1.89,0.137   l-11.544-6.07c-0.522-0.275-1.147-0.275-1.67,0l-11.544,6.069c-0.604,0.317-1.337,0.265-1.89-0.136   c-0.553-0.401-0.829-1.082-0.714-1.756l2.204-12.855c0.1-0.582-0.094-1.176-0.517-1.588L0.542,19.66   c-0.489-0.477-0.665-1.19-0.454-1.839c0.211-0.649,0.772-1.123,1.449-1.221l12.908-1.875c0.584-0.085,1.09-0.452,1.351-0.982   L21.57,2.049z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFD325"></path>                        </g></g> </svg>                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 46.354 46.354" style="enable-background:new 0 0 46.354 46.354;" xml:space="preserve"><g><g>                            <path d="M21.57,2.049c0.303-0.612,0.927-1,1.609-1c0.682,0,1.307,0.388,1.609,1l5.771,11.695c0.261,0.529,0.767,0.896,1.352,0.981   L44.817,16.6c0.677,0.098,1.237,0.572,1.448,1.221c0.211,0.649,0.035,1.363-0.454,1.839l-9.338,9.104   c-0.423,0.412-0.616,1.006-0.517,1.588l2.204,12.855c0.114,0.674-0.161,1.354-0.715,1.756c-0.553,0.4-1.284,0.453-1.89,0.137   l-11.544-6.07c-0.522-0.275-1.147-0.275-1.67,0l-11.544,6.069c-0.604,0.317-1.337,0.265-1.89-0.136   c-0.553-0.401-0.829-1.082-0.714-1.756l2.204-12.855c0.1-0.582-0.094-1.176-0.517-1.588L0.542,19.66   c-0.489-0.477-0.665-1.19-0.454-1.839c0.211-0.649,0.772-1.123,1.449-1.221l12.908-1.875c0.584-0.085,1.09-0.452,1.351-0.982   L21.57,2.049z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFD325"></path>                        </g></g> </svg>                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 46.354 46.354" style="enable-background:new 0 0 46.354 46.354;" xml:space="preserve"><g><g>                            <path d="M21.57,2.049c0.303-0.612,0.927-1,1.609-1c0.682,0,1.307,0.388,1.609,1l5.771,11.695c0.261,0.529,0.767,0.896,1.352,0.981   L44.817,16.6c0.677,0.098,1.237,0.572,1.448,1.221c0.211,0.649,0.035,1.363-0.454,1.839l-9.338,9.104   c-0.423,0.412-0.616,1.006-0.517,1.588l2.204,12.855c0.114,0.674-0.161,1.354-0.715,1.756c-0.553,0.4-1.284,0.453-1.89,0.137   l-11.544-6.07c-0.522-0.275-1.147-0.275-1.67,0l-11.544,6.069c-0.604,0.317-1.337,0.265-1.89-0.136   c-0.553-0.401-0.829-1.082-0.714-1.756l2.204-12.855c0.1-0.582-0.094-1.176-0.517-1.588L0.542,19.66   c-0.489-0.477-0.665-1.19-0.454-1.839c0.211-0.649,0.772-1.123,1.449-1.221l12.908-1.875c0.584-0.085,1.09-0.452,1.351-0.982   L21.57,2.049z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFD325"></path>                        </g></g> </svg>                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 46.354 46.354" style="enable-background:new 0 0 46.354 46.354;" xml:space="preserve"><g><g>                            <path d="M21.57,2.049c0.303-0.612,0.927-1,1.609-1c0.682,0,1.307,0.388,1.609,1l5.771,11.695c0.261,0.529,0.767,0.896,1.352,0.981   L44.817,16.6c0.677,0.098,1.237,0.572,1.448,1.221c0.211,0.649,0.035,1.363-0.454,1.839l-9.338,9.104   c-0.423,0.412-0.616,1.006-0.517,1.588l2.204,12.855c0.114,0.674-0.161,1.354-0.715,1.756c-0.553,0.4-1.284,0.453-1.89,0.137   l-11.544-6.07c-0.522-0.275-1.147-0.275-1.67,0l-11.544,6.069c-0.604,0.317-1.337,0.265-1.89-0.136   c-0.553-0.401-0.829-1.082-0.714-1.756l2.204-12.855c0.1-0.582-0.094-1.176-0.517-1.588L0.542,19.66   c-0.489-0.477-0.665-1.19-0.454-1.839c0.211-0.649,0.772-1.123,1.449-1.221l12.908-1.875c0.584-0.085,1.09-0.452,1.351-0.982   L21.57,2.049z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFD325"></path>                        </g></g> </svg>                    </div>                    <a class="free-vpn_rate-btn" target="_blank" href="https://chrome.google.com/webstore/detail/free-vpn-the-fastest-vpn/enaobbodnmbpecahhojidoiblhmnohef/reviews">Rate VPN</a>                </div>            </div>        </div><div class="suggestions" style="display: none; font-size: 13px;"><div class="suggestions-results"></div><div class="suggestions-special"></div></div></body></html>
